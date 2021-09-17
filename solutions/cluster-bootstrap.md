@@ -1,7 +1,7 @@
 ## Step 4 - initialize the master
 
 No, the `master` node is not ready because the kubelet is not ready.
-Reason: `runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network plugin is not ready: cni config uninitialized``
+Reason: `runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network plugin is not ready: cni config uninitialized`
 
 For this reason, the CoreDNS pods cannot be scheduled on the master because of the `node.kubernetes.io/not-ready` taint.
 

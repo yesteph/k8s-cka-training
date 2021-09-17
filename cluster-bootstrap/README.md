@@ -105,10 +105,12 @@ For that, run a pod named `lookup` using `alpine` image in the `default` namespa
 Do the same thing with in the `kube-system` namespace.
 
 <details>
+
 ```sh
 kubectl run lookup --image=alpine -n default -- sh -c "sleep 1000"
 kubectl run lookup --image=alpine -n kube-system -- sh -c "sleep 1000"
 ```
+
 </details>
 
 ## Services
