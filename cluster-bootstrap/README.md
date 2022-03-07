@@ -12,7 +12,7 @@ As seen, this supposes 6 steps:
 
 ## Steps 1 to 3 have been already done.
 
-We ask you to finalize the setup.
+We ask you to finalize the setup in release 1.20.
 
 ## Step 4 - initialize the master
 
@@ -81,9 +81,11 @@ At the end, verify you get a 3 node cluster.
 You will try to modify a static pod.
 
 On the `master` node, look at the folder `/etc/kubernetes/manifests`.
-Edit the kube-scheduler.yaml file to add a label `fromManifest:"true"`.
+Edit the kube-scheduler.yaml file to add a label `fromManifest: static`.
 
 Is the modification applied?
+
+**It is important to ensure you get a running `kube-scheduler` pod in the `kube-system` namespace. If not, you will be able to schedule and so deploy new pods.**
 
 # CoreDNS
 
@@ -94,7 +96,7 @@ Note this value `CLUSTER_DOMAIN`.
 <details>
 
 ```sh
-kubectl get cm coredns -n kube-system |grep kubernetes|awk '{print $2}'
+kubectl get cm coredns -n kube-system -o yaml|grep kubernetes|awk '{print $2}'
 ```
 
 </details>
@@ -115,7 +117,7 @@ kubectl run lookup --image=alpine -n kube-system -- sh -c "sleep 1000"
 
 ## Services
 
-From each pod, ry to resolve the DNS `kube-dns` service:
+From each pod, try to resolve the DNS `kube-dns` service:
 ```sh
 nslookup kube-dns
 nslookup kube-dns.kube-system
@@ -127,7 +129,7 @@ What are the successful queries? Why?
 
 ## Pods
 
-Note the IP of a `etcd-master` pod in the `kube-system` namespace: *W.X.Y.Z*
+Note the IP of the `etcd-master` pod in the `kube-system` namespace: *W.X.Y.Z*
 
 Try to query the related DNS records:
 ```sh
